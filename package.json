@@ -1,0 +1,127 @@
+{
+   "name": "realgreen-gohighlevel-integration",
+   "version": "1.0.0",
+   "description": "AI integration of RG and GHL",
+   "main": "server.js",
+   "scripts": {
+      "start": "node server.js",
+      "dev": "nodemon server.js",
+      "dev:debug": "nodemon --inspect server.js",
+      "test": "jest --watch --testPathPattern=tests/",
+      "test:coverage": "jest --coveragee --testPathPattern=tests/",
+      "lint": "eslint .",
+      "lint:fix": "eslint . --fix",
+      "format": "prettier --write '**/*{js,json,md}'",
+      "docker:build": "docker build -t realgreen-ghl-integration . ",
+      "docker:run": "docker run -p 3000:3000 --env-file e.env real.green-ghl-integration",
+      "docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
+      "docker:prod": "docker-compose -f. docker-compose.prod.yml up -d --build",
+      "docs:generate": "node scripts/generate0-openai.js",
+      "docs:serve": "swagger-ui-watch openai.yaml",
+      "security:audit": "npm audit fix",
+      "security:fix": "npm audit fix",
+      "clean": "rm -rf node_modules coverage dist",
+      "health:check": "curl http://localhost:3000/health || echo 'Server not running'",
+      "deploy:setup": "node  scripts/deploy-setup.js"
+   },
+   "keywords": [
+      "realgreen",
+      "gohighlevel",
+      "integration",
+      "api",
+      "ai",
+      "openai",
+      "lawn-care",
+      "crm",
+      "service-management"
+   ],
+   "author": "Greener Grass <joseph@choosegreenergrass.com",
+   "license": "MIT",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/greenergrass/realgreen-gohighlevel-integration.git"
+   },
+   "bugs": {
+      "url": "https://github.com/greenergrass/issues"
+   },
+   "homepage": "https://github.com/greenergrass/real-green-gohighlevel-integration#readme",
+   "engines": {
+      "node": ">==18.0.0",
+      "npm": ">=9.0.0"
+   },
+   "dependencies": {
+      "@anthropic-ai/sdk": "^0.24.0",
+      "axios": "^1.6.0",
+      "cors": "^2.8.5",
+      "dotenv": "^16.3.0",
+      "express": "^4.17.21",
+      "express-rate-limit": "^7.1.0",
+      "helmet": "^7.0.0",
+      "joi": "^17.9.0",
+      "redis": "^4.6.0",
+      "swagger-ui-express": "^5.0.0",
+      "winston": "^3.10.0",
+      "yamljs": "^0.3.0"
+   },
+   "devDependencies": {
+      "@types/cors": "^2.8.13",
+      "@types/express": "^4.17.25",
+      "@types/jest": "^29.5.0",
+      "@types/node": "^20.0.0",
+      "@types/swagger-ui-express": "^4.1.3",
+      "eslint": "^8.44.0",
+      "eslint-config-airbnb-base": "^15.0.0",
+      "eslint-config-prettier": "^8.8.0",
+      "eslint-plugin-import": "^2.27.0",
+      "eslint-plugin-jest": "^27.2.0",
+      "eslint-plugin-prettier": "^4.2.1",
+      "jest": "^29.5.0",
+      "nodemon": "^3.0.0",
+      "prettier": "^3.0.0",
+      "supertest": "^6.3.0",
+      "swagger-ui-watch": "^1.0.0",
+      "ts-jest": "^29.1.0",
+      "typescript": "^5.1.0"
+   },
+   "jest": {
+      "testEnvironment": "node",
+      "coveragePathIgnorePatterns": [
+         "/node_modules/",
+         "/tests/",
+         "/coverage/"
+      ],
+      "collectCoveraegFrom": [
+         "**/*.js",
+         "!**/node_modules/**",
+         "!**/tests/**",
+         "!**/coverage/**"
+      ],
+      "setupFiles": [
+         "dotenv/config"
+      ]
+   },
+   "nodemonConfig": {
+      "watch": [
+         "server.js",
+         "src/",
+         ".env"
+      ],
+      "exec": "node server.js",
+      "delay": "1000"
+   },
+   "volta": {
+      "node": "18.16.0"
+   },
+   "files": [
+      "server.js",
+      "src/",
+      "package.json",
+      "README.md",
+      "LICENSE",
+      ".env.example",
+      "docker-compose.yml",
+      "Dockerfile",
+      "openai.yaml"
+   ],
+   "private": true
+}
